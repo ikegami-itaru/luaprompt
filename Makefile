@@ -2,6 +2,7 @@ VERSION = 5.3
 PREFIX = /usr/local
 BINDIR = ${PREFIX}/bin
 LIBDIR = $(PREFIX)/lib/lua/${VERSION}
+INCDIR = $(PREFIX)/include/lua
 MANDIR = $(PREFIX)/man
 MAN1DIR = $(MANDIR)/man1
 
@@ -94,6 +95,8 @@ dist: luap
 install: prompt.so
 	mkdir -p $(BINDIR)
 	$(INSTALL) luap.lua $(BINDIR)/luap
+	mkdir -p $(INCDIR)
+	$(INSTALL) -m 644 prompt.h $(INCDIR)/prompt.h
 	mkdir -p $(LIBDIR)
 	$(INSTALL) -m 644 prompt.so $(LIBDIR)/prompt.so
 	mkdir -p $(MAN1DIR)
