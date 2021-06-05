@@ -5,6 +5,8 @@ LIBDIR = $(PREFIX)/lib/lua/${VERSION}
 INCDIR = $(PREFIX)/include/lua
 MANDIR = $(PREFIX)/man
 MAN1DIR = $(MANDIR)/man1
+PKGCFGDIR = $(PREFIX)/lib/pkgconfig
+PKGCFGFILE = luaprompt.pc
 
 # Modify these as needed, if there are missing header files or
 # libraries.
@@ -81,10 +83,12 @@ CFLAGS += '-DRESULTS_TABLE_NAME="_"'
 LDFLAGS=-lreadline -lhistory
 INSTALL=/usr/bin/install
 
-all: prompt.so
+all: prompt.so $(PKGCFGFILE)
 
 prompt.so: module.c prompt.c prompt.h
 	$(CC) -o prompt.so -shared ${CFLAGS} ${LUA_CFLAGS} module.c prompt.c ${LDFLAGS} ${LUA_LDFLAGS}
+
+luaprompt.pc: pkg-config
 
 dist: luap
 	if [ -e /tmp/prompt ]; then rm -rf /tmp/prompt; fi
@@ -106,4 +110,22 @@ uninstall:
 	rm -f $(BINDIR)/luap $(LIBDIR)/prompt.so $(MAN1DIR)/luap.1
 
 clean:
-	rm -f prompt.so *~
+	rm -f prompt.so luaprompt.pc *~
+
+.ONESHELL:
+pkg-config: Makefile
+	cat > $(PKGCFGFILE) << "_EOF"
+	prefix=$(PREFIX)
+	exec_prefix=$${prefix}
+	lua_version=5.3
+	includedir=$${prefix}/include/lua
+	libdir=$${exec_prefix}/lib/lua/$${lua_version}
+	Name: luaprompt
+	Description: A Lua command prompt with pretty-printing and auto-completion
+	Version: 0.7.12
+	URL: https://github.com/dpapavas/luaprompt
+	Libs: $${libdir}/prompt.so
+	Libs.private: -lreadline -lhistory
+	Cflags: $(LUA_CFLAGS) -I$${includedir}
+	$(LUA_LDFLAGS)
+	_EOF
