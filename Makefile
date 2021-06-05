@@ -105,9 +105,11 @@ install: prompt.so
 	$(INSTALL) -m 644 prompt.so $(LIBDIR)/prompt.so
 	mkdir -p $(MAN1DIR)
 	$(INSTALL) -m 644 luap.1 $(MAN1DIR)/luap.1
+	mkdir -p $(PKGCFGDIR)
+	$(INSTALL) -m 644 $(PKGCFGFILE) $(PKGCFGDIR)/$(PKGCFGFILE)
 
 uninstall:
-	rm -f $(BINDIR)/luap $(LIBDIR)/prompt.so $(MAN1DIR)/luap.1
+	rm -f $(BINDIR)/luap $(LIBDIR)/prompt.so $(MAN1DIR)/luap.1 $(PKGCFGDIR)/$(PKGCFGFILE)
 
 clean:
 	rm -f prompt.so luaprompt.pc *~
