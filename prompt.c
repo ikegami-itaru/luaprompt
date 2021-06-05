@@ -71,6 +71,7 @@ static char *readline(char *prompt)
     fflush(stdout);
 
     if (!fgets(line, MAXINPUT, stdin)) {
+	free(line);
         return NULL;
     }
 
