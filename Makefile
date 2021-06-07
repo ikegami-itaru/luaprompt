@@ -126,6 +126,7 @@ pkg-config: Makefile
 	Description: A Lua command prompt with pretty-printing and auto-completion
 	Version: 0.7.12
 	URL: https://github.com/dpapavas/luaprompt
+	Requires: lua${VERSION}
 	Libs: $${libdir}/prompt.so
 	Libs.private: -lreadline -lhistory
 	Cflags: $(LUA_CFLAGS) -I$${includedir}
