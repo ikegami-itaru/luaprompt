@@ -1,4 +1,4 @@
-VERSION = 5.3
+VERSION = 5.4
 PREFIX = /usr/local
 BINDIR = ${PREFIX}/bin
 LIBDIR = $(PREFIX)/lib/lua/${VERSION}
@@ -119,7 +119,7 @@ pkg-config: Makefile
 	cat > $(PKGCFGFILE) << "_EOF"
 	prefix=$(PREFIX)
 	exec_prefix=$${prefix}
-	lua_version=5.3
+	lua_version=$(VERSION)
 	includedir=$${prefix}/include/lua
 	libdir=$${exec_prefix}/lib/lua/$${lua_version}
 	Name: luaprompt
