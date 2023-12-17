@@ -1,4 +1,4 @@
--- Copyright (C) 2015 Boris Nagaev, Dimitris Papavasiliou
+-- Copyright (C) 2012-2023 Dimitris Papavasiliou, Boris Nagaev
 --
 -- Permission is hereby granted, free of charge, to any person
 -- obtaining a copy of this software and associated documentation
@@ -25,7 +25,7 @@ version = "dev-1"
 supported_platforms = {"!windows", "!win32"}
 
 source = {
-    url = "git://github.com/dpapavas/luaprompt.git",
+    url = "git+https://github.com/dpapavas/luaprompt.git",
 }
 
 description = {

@@ -12,7 +12,9 @@ PKGCFGFILE = luaprompt.pc
 # libraries.
 
 LUA_CFLAGS = $(shell pkg-config --cflags lua${VERSION})
+READLINE_CFLAGS = $(shell pkg-config --cflags readline)
 LUA_LDFLAGS = $(shell pkg-config --libs-only-L lua${VERSION})
+READLINE_LDFLAGS = $(shell pkg-config --libs-only-L readline)
 
 CFLAGS = -g -fPIC
 CFLAGS += -Wall -Wextra -Wno-unused-parameter -DHAVE_ASPRINTF
@@ -86,7 +88,7 @@ INSTALL=/usr/bin/install
 all: prompt.so $(PKGCFGFILE)
 
 prompt.so: module.c prompt.c prompt.h
-	$(CC) -o prompt.so -shared ${CFLAGS} ${LUA_CFLAGS} module.c prompt.c ${LDFLAGS} ${LUA_LDFLAGS}
+	$(CC) -o prompt.so -shared ${CFLAGS} ${LUA_CFLAGS} ${READLINE_CFLAGS} module.c prompt.c ${LDFLAGS} ${LUA_LDFLAGS} ${READLINE_LDFLAGS}
 
 luaprompt.pc: pkg-config
 
