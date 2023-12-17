@@ -126,7 +126,7 @@ pkg-config: Makefile
 	libdir=$${exec_prefix}/lib/lua/$${lua_version}
 	Name: luaprompt
 	Description: A Lua command prompt with pretty-printing and auto-completion
-	Version: 0.7.12
+	Version: 0.8
 	URL: https://github.com/dpapavas/luaprompt
 	Requires: lua${VERSION}
 	Libs: $${libdir}/prompt.so
